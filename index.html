@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Jasmine &amp; Gurpreet · Ring Ceremony</title>
+<meta name="description" content="You're invited to the ring ceremony of Jasmine Kaur and Gurpreet Singh. Friday, 23 October 2026 at 11:00 AM, WJ Grand Hotel.">
+<meta name="theme-color" content="#2a0d3a">
+<meta property="og:title" content="Jasmine & Gurpreet – Ring Ceremony">
+<meta property="og:description" content="Friday, 23 October 2026 at 11:00 AM · WJ Grand Hotel">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💍</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --plum-deep: #1c0828;
+    --plum: #2a0d3a;
+    --plum-mid: #5a2a6e;
+    --mauve: #9a6aa8;
+    --gold: #ecd5a4;
+    --gold-soft: #d8b87a;
+    --cream: #f8eeee;
+    --ink: #3a1d49;
+    --serif: "Playfair Display", "Iowan Old Style", Georgia, serif;
+    --sans: "Nunito Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    background: var(--plum-deep);
+    font-family: var(--sans);
+    color: var(--ink);
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .card {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    background: var(--cream);
+    overflow: hidden;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    text-align: center;
+    color: var(--gold);
+    padding: 64px 24px 120px;
+    background:
+      radial-gradient(ellipse 80% 45% at 50% 0%, #7d3b88 0%, rgba(125,59,136,0) 100%),
+      linear-gradient(180deg, #4a1a5c 0%, #2a0d3a 45%, #1c0828 100%);
+    border-radius: 0 0 50% 50% / 0 0 64px 64px;
+  }
+  .rings { width: 118px; height: auto; display: block; margin: 0 auto 22px; }
+  .rings * { fill: none; stroke: var(--gold-soft); stroke-width: 1.5; stroke-linejoin: round; }
+  .rings .draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 2.2s ease-out .2s forwards; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+
+  .pill {
+    display: inline-block;
+    padding: 8px 22px;
+    border: 1px solid rgba(236,213,164,.55);
+    border-radius: 999px;
+    font-size: 15px;
+    letter-spacing: .02em;
+    color: var(--gold);
+    margin-bottom: 34px;
+  }
+  .name {
+    margin: 0;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(54px, 16vw, 80px);
+    line-height: 1.05;
+    color: var(--gold);
+  }
+  .surname {
+    display: block;
+    margin: 10px 0 12px;
+    font-size: 15px;
+    letter-spacing: .5em;
+    padding-left: .5em;
+    color: var(--gold-soft);
+  }
+  .amp {
+    display: block;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 30px;
+    color: var(--gold-soft);
+    margin-bottom: 8px;
+  }
+  .reveal { opacity: 0; transform: translateY(10px); animation: rise .9s ease-out forwards; }
+  .d1 { animation-delay: 1.0s; } .d2 { animation-delay: 1.25s; } .d3 { animation-delay: 1.5s; }
+  .d4 { animation-delay: 1.75s; } .d5 { animation-delay: 2.0s; }
+  @keyframes rise { to { opacity: 1; transform: none; } }
+
+  /* ---------- Details ---------- */
+  .details {
+    position: relative;
+    text-align: center;
+    padding: 44px 30px 56px;
+  }
+  .intro {
+    margin: 0 auto 30px;
+    max-width: 30ch;
+    font-size: 18px;
+    line-height: 1.6;
+  }
+  .date-card {
+    background: #fff;
+    border-radius: 24px;
+    padding: 22px 16px 20px;
+    box-shadow: 0 10px 30px rgba(90,42,110,.12);
+    margin-bottom: 28px;
+  }
+  .date {
+    margin: 0;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 700;
+    font-size: clamp(24px, 7vw, 31px);
+    color: var(--plum);
+  }
+  .time { margin: 6px 0 0; font-size: 16px; }
+
+  .venue {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 0 0 8px;
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--plum);
+  }
+  .venue svg { width: 22px; height: 22px; stroke: var(--mauve); fill: none; stroke-width: 1.8; flex: none; }
+
+  /* ---------- Countdown ---------- */
+  .countdown {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 34px auto 34px;
+    padding: 16px 0;
+    border-top: 1px solid rgba(154,106,168,.4);
+    border-bottom: 1px solid rgba(154,106,168,.4);
+  }
+  .unit + .unit { border-left: 1px solid rgba(154,106,168,.3); }
+  .num {
+    display: block;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 1.1;
+    color: var(--plum);
+    font-variant-numeric: tabular-nums;
+  }
+  .lbl { display: block; margin-top: 4px; font-size: 13px; color: var(--mauve); }
+  .done { grid-column: 1 / -1; font-family: var(--serif); font-style: italic; font-size: 24px; color: var(--plum); padding: 6px 0; }
+
+  /* ---------- Buttons ---------- */
+  .actions { display: grid; gap: 12px; margin-bottom: 14px; }
+  .btn {
+    display: block;
+    width: 100%;
+    padding: 15px 20px;
+    border-radius: 999px;
+    border: 1.5px solid var(--plum);
+    background: transparent;
+    color: var(--plum);
+    font: 700 16px/1 var(--sans);
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background .2s, color .2s;
+  }
+  .btn.primary { background: var(--plum); color: var(--gold); }
+  .btn:hover { background: var(--plum-mid); color: var(--gold); border-color: var(--plum-mid); }
+  .btn:focus-visible, .alt:focus-visible { outline: 3px solid var(--mauve); outline-offset: 3px; }
+  .alt { font-size: 14px; color: var(--mauve); }
+  .closing { margin: 38px 0 0; font-size: 17px; }
+
+  /* ---------- Vines ---------- */
+  .vine { position: absolute; top: 0; bottom: 0; width: 30px; height: 100%; pointer-events: none; }
+  .vine.l { left: 6px; } .vine.r { right: 6px; transform: scaleX(-1); }
+  .vine path { fill: none; stroke-width: 1.2; vector-effect: non-scaling-stroke; }
+  .hero .vine path { stroke: rgba(236,213,164,.5); }
+  .details .vine path { stroke: rgba(154,106,168,.55); }
+
+  /* ---------- Petals ---------- */
+  #petals { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rings .draw { animation: none; stroke-dashoffset: 0; }
+    .reveal { animation: none; opacity: 1; transform: none; }
+    #petals { display: none; }
+  }
+</style>
+</head>
+<body>
+<canvas id="petals" aria-hidden="true"></canvas>
+
+<main class="card">
+  <header class="hero">
+    <svg class="vine l" viewBox="0 0 30 400" preserveAspectRatio="none" aria-hidden="true"><path d="M22 0 C4 50 26 90 8 140 S24 230 8 280 S22 360 10 400"/></svg>
+    <svg class="vine r" viewBox="0 0 30 400" preserveAspectRatio="none" aria-hidden="true"><path d="M22 0 C4 50 26 90 8 140 S24 230 8 280 S22 360 10 400"/></svg>
+
+    <svg class="rings" viewBox="0 0 100 74" aria-hidden="true">
+      <circle class="draw" pathLength="1" cx="36" cy="45" r="24"/>
+      <circle class="draw" pathLength="1" cx="62" cy="45" r="24"/>
+      <path class="draw" pathLength="1" d="M62 5 L67 11 L62 17 L57 11 Z"/>
+    </svg>
+
+    <span class="pill reveal d1">Ring ceremony</span>
+    <h1 class="name reveal d2">Jasmine <span class="surname">Kaur</span></h1>
+    <span class="amp reveal d3">&amp;</span>
+    <h1 class="name reveal d4">Gurpreet <span class="surname">Singh</span></h1>
+  </header>
+
+  <section class="details">
+    <svg class="vine l" viewBox="0 0 30 400" preserveAspectRatio="none" aria-hidden="true"><path d="M22 0 C4 50 26 90 8 140 S24 230 8 280 S22 360 10 400"/></svg>
+    <svg class="vine r" viewBox="0 0 30 400" preserveAspectRatio="none" aria-hidden="true"><path d="M22 0 C4 50 26 90 8 140 S24 230 8 280 S22 360 10 400"/></svg>
+
+    <p class="intro">Together with their families, they joyfully invite you to celebrate their ring ceremony.</p>
+
+    <div class="date-card">
+      <p class="date">Friday, 23 October 2026</p>
+      <p class="time">at eleven o'clock in the morning</p>
+    </div>
+
+    <p class="venue">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.2A7 7 0 0 1 19 9.8C19 14.8 12 21 12 21z"/><circle cx="12" cy="10" r="2.5"/></svg>
+      WJ Grand Hotel
+    </p>
+
+    <div class="countdown" id="countdown" role="timer" aria-label="Time until the ceremony">
+      <div class="unit"><span class="num" id="cd-d">0</span><span class="lbl">days</span></div>
+      <div class="unit"><span class="num" id="cd-h">0</span><span class="lbl">hours</span></div>
+      <div class="unit"><span class="num" id="cd-m">0</span><span class="lbl">minutes</span></div>
+      <div class="unit"><span class="num" id="cd-s">0</span><span class="lbl">seconds</span></div>
+    </div>
+
+    <div class="actions">
+      <button class="btn primary" id="add-ics" type="button">Add to calendar</button>
+      <a class="btn" id="directions" href="#" target="_blank" rel="noopener">Get directions</a>
+    </div>
+    <a class="alt" id="add-google" href="#" target="_blank" rel="noopener">Use Google Calendar instead</a>
+
+    <p class="closing">We look forward to celebrating with you.</p>
+  </section>
+</main>
+
+<script>
+  /* ====== Edit these if anything changes ====== */
+  const EVENT = {
+    title: "Ring ceremony – Jasmine & Gurpreet",
+    start: new Date(2026, 9, 23, 11, 0, 0),   // 23 Oct 2026, 11:00 AM (viewer's local time)
+    durationHours: 3,                         // used for the calendar entry only
+    venue: "WJ Grand Hotel",
+    mapQuery: "WJ Grand Hotel",               // replace with the full street address for best results
+    details: "Jasmine Kaur & Gurpreet Singh invite you to celebrate their ring ceremony."
+  };
+  /* ============================================ */
+
+  const pad = n => String(n).padStart(2, "0");
+  const stamp = d => d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate()) + "T" + pad(d.getHours()) + pad(d.getMinutes()) + "00";
+  const end = new Date(EVENT.start.getTime() + EVENT.durationHours * 3600000);
+
+  // Directions
+  document.getElementById("directions").href =
+    "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(EVENT.mapQuery);
+
+  // Calendar: Google link
+  document.getElementById("add-google").href =
+    "https://calendar.google.com/calendar/render?action=TEMPLATE" +
+    "&text=" + encodeURIComponent(EVENT.title) +
+    "&dates=" + stamp(EVENT.start) + "/" + stamp(end) +
+    "&location=" + encodeURIComponent(EVENT.venue) +
+    "&details=" + encodeURIComponent(EVENT.details);
+
+  // Calendar: .ics download (Apple, Outlook, others)
+  document.getElementById("add-ics").addEventListener("click", () => {
+    const now = new Date();
+    const utcStamp = now.getUTCFullYear() + pad(now.getUTCMonth() + 1) + pad(now.getUTCDate()) + "T" +
+                     pad(now.getUTCHours()) + pad(now.getUTCMinutes()) + pad(now.getUTCSeconds()) + "Z";
+    const ics = [
+      "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Ring Ceremony Invite//EN", "CALSCALE:GREGORIAN",
+      "BEGIN:VEVENT",
+      "UID:ring-ceremony-jasmine-gurpreet-20261023@invite",
+      "DTSTAMP:" + utcStamp,
+      "DTSTART:" + stamp(EVENT.start),
+      "DTEND:" + stamp(end),
+      "SUMMARY:" + EVENT.title,
+      "LOCATION:" + EVENT.venue,
+      "DESCRIPTION:" + EVENT.details,
+      "END:VEVENT", "END:VCALENDAR"
+    ].join("\r\n");
+    const url = URL.createObjectURL(new Blob([ics], { type: "text/calendar;charset=utf-8" }));
+    const a = document.createElement("a");
+    a.href = url; a.download = "ring-ceremony.ics";
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  });
+
+  // Countdown
+  const cd = { d: document.getElementById("cd-d"), h: document.getElementById("cd-h"),
+               m: document.getElementById("cd-m"), s: document.getElementById("cd-s") };
+  const cdBox = document.getElementById("countdown");
+  function tick() {
+    const diff = EVENT.start - new Date();
+    if (diff <= 0) {
+      const sameDay = new Date().toDateString() === EVENT.start.toDateString();
+      cdBox.innerHTML = '<div class="done">' + (sameDay ? "Today is the day" : "Thank you for celebrating with us") + "</div>";
+      cdBox.style.display = "block";
+      return clearInterval(timer);
+    }
+    const s = Math.floor(diff / 1000);
+    cd.d.textContent = Math.floor(s / 86400);
+    cd.h.textContent = pad(Math.floor(s % 86400 / 3600));
+    cd.m.textContent = pad(Math.floor(s % 3600 / 60));
+    cd.s.textContent = pad(s % 60);
+  }
+  const timer = setInterval(tick, 1000);
+  tick();
+
+  // Falling petals
+  (function () {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const canvas = document.getElementById("petals");
+    const ctx = canvas.getContext("2d");
+    const colors = ["rgba(216,184,122,", "rgba(236,213,164,", "rgba(185,138,156,"];
+    let W, H, petals = [];
+    function resize() {
+      const dpr = window.devicePixelRatio || 1;
+      W = innerWidth; H = innerHeight;
+      canvas.width = W * dpr; canvas.height = H * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    function make(startAnywhere) {
+      return {
+        x: Math.random() * W,
+        y: startAnywhere ? Math.random() * H : -20,
+        size: 5 + Math.random() * 8,
+        speed: 0.5 + Math.random() * 0.9,
+        sway: 0.6 + Math.random() * 1.2,
+        phase: Math.random() * Math.PI * 2,
+        rot: Math.random() * Math.PI * 2,
+        spin: (Math.random() - .5) * 0.03,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        alpha: 0.35 + Math.random() * 0.4
+      };
+    }
+    function init() {
+      resize();
+      const count = Math.min(26, Math.floor(W / 16));
+      petals = Array.from({ length: count }, () => make(true));
+    }
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      for (const p of petals) {
+        p.phase += 0.015;
+        p.y += p.speed;
+        p.x += Math.sin(p.phase) * p.sway * 0.5;
+        p.rot += p.spin;
+        if (p.y > H + 20) Object.assign(p, make(false));
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot);
+        ctx.scale(1, 0.6 + Math.abs(Math.sin(p.phase)) * 0.4);
+        ctx.fillStyle = p.color + p.alpha + ")";
+        ctx.beginPath();
+        ctx.moveTo(0, -p.size);
+        ctx.quadraticCurveTo(p.size * .8, 0, 0, p.size);
+        ctx.quadraticCurveTo(-p.size * .8, 0, 0, -p.size);
+        ctx.fill();
+        ctx.restore();
+      }
+      requestAnimationFrame(draw);
+    }
+    addEventListener("resize", resize);
+    init();
+    draw();
+  })();
+</script>
+</body>
+</html>
