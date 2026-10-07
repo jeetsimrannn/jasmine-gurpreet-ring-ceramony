@@ -248,7 +248,7 @@
   .audio-toggle {
     position: fixed;
     bottom: calc(18px + env(safe-area-inset-bottom, 0px));
-    left: 18px;
+    right: 18px;
     z-index: 80;
     width: 42px;
     height: 42px;
@@ -271,7 +271,7 @@
   .audio-toggle.is-muted { color: var(--gold); border-color: rgba(234,217,187,.5); }
   .audio-toggle.is-muted .audio-icon-on { display: none; }
   .audio-toggle.is-muted .audio-icon-off { display: block; }
-  @media (max-width: 480px) { .audio-toggle { left: 12px; width: 38px; height: 38px; } }
+  @media (max-width: 480px) { .audio-toggle { right: 12px; width: 38px; height: 38px; } }
 
   @media (prefers-reduced-motion: reduce) {
     .rings .draw { animation: none; stroke-dashoffset: 0; }
@@ -283,6 +283,7 @@
 <body>
 <audio id="bgAudio" preload="auto" loop>
   <source src="bg-music.mp3" type="audio/mpeg">
+  <source src="bg-audio.mp3" type="audio/mpeg">
 </audio>
 
 <button id="audioToggle" class="audio-toggle is-muted" type="button" aria-label="Unmute music" aria-pressed="true">
