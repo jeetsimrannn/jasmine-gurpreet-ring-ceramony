@@ -136,7 +136,7 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
-    margin: 44px 0 14px;
+    margin: 44px 0 6px;
     font-weight: 700;
     font-size: 20px;
     color: var(--plum);
@@ -165,6 +165,8 @@
   }
   .lbl { display: block; margin-top: 4px; font-size: 13px; color: var(--mauve); }
   .done { grid-column: 1 / -1; font-family: var(--serif); font-style: italic; font-size: 24px; color: var(--plum); padding: 6px 0; }
+
+  .addr { margin: 0 0 16px; font-size: 14px; color: var(--mauve); }
 
   /* ---------- Map ---------- */
   .map {
@@ -263,6 +265,7 @@
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.2A7 7 0 0 1 19 9.8C19 14.8 12 21 12 21z"/><circle cx="12" cy="10" r="2.5"/></svg>
       WJ Grand Hotel
     </p>
+    <p class="addr">Near Verka Milk Plant, Grand Trunk Road, Salempur, Jalandhar</p>
 
     <div class="map"><iframe id="map" title="Map showing WJ Grand Hotel" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
 
@@ -277,8 +280,8 @@
 <script>
   /* ====== Edit these if anything changes ====== */
   const EVENT = {
-    start: new Date(2026, 9, 23, 11, 0, 0),   // 23 Oct 2026, 11:00 AM (viewer's local time)
-    mapQuery: "WJ Grand Hotel"                // replace with the full street address for best results
+    start: new Date("2026-10-23T11:00:00+05:30"),   // 23 Oct 2026, 11:00 AM India time
+    mapQuery: "WJ Grand Hotel, Near Verka Milk Plant, Grand Trunk Road, Salempur, Jalandhar, Punjab 144008"
   };
   /* ============================================ */
 
