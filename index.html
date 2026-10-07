@@ -119,7 +119,7 @@
     border-radius: 24px;
     padding: 22px 16px 20px;
     box-shadow: 0 10px 30px rgba(90,42,110,.12);
-    margin-bottom: 28px;
+    margin-bottom: 20px;
   }
   .date {
     margin: 0;
@@ -136,7 +136,7 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
-    margin: 0 0 8px;
+    margin: 44px 0 14px;
     font-weight: 700;
     font-size: 20px;
     color: var(--plum);
@@ -147,7 +147,7 @@
   .countdown {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    margin: 34px auto 34px;
+    margin: 0 0 28px;
     padding: 16px 0;
     border-top: 1px solid rgba(154,106,168,.4);
     border-bottom: 1px solid rgba(154,106,168,.4);
@@ -166,8 +166,20 @@
   .lbl { display: block; margin-top: 4px; font-size: 13px; color: var(--mauve); }
   .done { grid-column: 1 / -1; font-family: var(--serif); font-style: italic; font-size: 24px; color: var(--plum); padding: 6px 0; }
 
+  /* ---------- Map ---------- */
+  .map {
+    aspect-ratio: 16 / 10;
+    margin: 0 0 16px;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(154,106,168,.35);
+    box-shadow: 0 8px 22px rgba(90,42,110,.10);
+    background: #eadfe8;
+  }
+  .map iframe { width: 100%; height: 100%; border: 0; display: block; }
+
   /* ---------- Buttons ---------- */
-  .actions { display: grid; gap: 12px; margin-bottom: 14px; }
+  .actions { display: grid; gap: 12px; }
   .btn {
     display: block;
     width: 100%;
@@ -231,16 +243,6 @@
 
     <p class="intro">Together with their families, they joyfully invite you to celebrate their ring ceremony.</p>
 
-    <div class="date-card">
-      <p class="date">Friday, 23 October 2026</p>
-      <p class="time">at eleven o'clock in the morning</p>
-    </div>
-
-    <p class="venue">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.2A7 7 0 0 1 19 9.8C19 14.8 12 21 12 21z"/><circle cx="12" cy="10" r="2.5"/></svg>
-      WJ Grand Hotel
-    </p>
-
     <div class="countdown" id="countdown" role="timer" aria-label="Time until the ceremony">
       <div class="unit"><span class="num" id="cd-d">0</span><span class="lbl">days</span></div>
       <div class="unit"><span class="num" id="cd-h">0</span><span class="lbl">hours</span></div>
@@ -248,11 +250,25 @@
       <div class="unit"><span class="num" id="cd-s">0</span><span class="lbl">seconds</span></div>
     </div>
 
+    <div class="date-card">
+      <p class="date">Friday, 23 October 2026</p>
+      <p class="time">at eleven o'clock in the morning</p>
+    </div>
+
     <div class="actions">
-      <button class="btn primary" id="add-ics" type="button">Add to calendar</button>
+      <a class="btn primary" href="ring-ceremony.ics" download="ring-ceremony.ics">Add to calendar</a>
+    </div>
+
+    <p class="venue">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.2A7 7 0 0 1 19 9.8C19 14.8 12 21 12 21z"/><circle cx="12" cy="10" r="2.5"/></svg>
+      WJ Grand Hotel
+    </p>
+
+    <div class="map"><iframe id="map" title="Map showing WJ Grand Hotel" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+
+    <div class="actions">
       <a class="btn" id="directions" href="#" target="_blank" rel="noopener">Get directions</a>
     </div>
-    <a class="alt" id="add-google" href="#" target="_blank" rel="noopener">Use Google Calendar instead</a>
 
     <p class="closing">We look forward to celebrating with you.</p>
   </section>
@@ -261,54 +277,18 @@
 <script>
   /* ====== Edit these if anything changes ====== */
   const EVENT = {
-    title: "Ring ceremony – Jasmine & Gurpreet",
     start: new Date(2026, 9, 23, 11, 0, 0),   // 23 Oct 2026, 11:00 AM (viewer's local time)
-    durationHours: 3,                         // used for the calendar entry only
-    venue: "WJ Grand Hotel",
-    mapQuery: "WJ Grand Hotel",               // replace with the full street address for best results
-    details: "Jasmine Kaur & Gurpreet Singh invite you to celebrate their ring ceremony."
+    mapQuery: "WJ Grand Hotel"                // replace with the full street address for best results
   };
   /* ============================================ */
 
   const pad = n => String(n).padStart(2, "0");
-  const stamp = d => d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate()) + "T" + pad(d.getHours()) + pad(d.getMinutes()) + "00";
-  const end = new Date(EVENT.start.getTime() + EVENT.durationHours * 3600000);
 
-  // Directions
+  // Map + directions
+  document.getElementById("map").src =
+    "https://maps.google.com/maps?q=" + encodeURIComponent(EVENT.mapQuery) + "&output=embed";
   document.getElementById("directions").href =
     "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(EVENT.mapQuery);
-
-  // Calendar: Google link
-  document.getElementById("add-google").href =
-    "https://calendar.google.com/calendar/render?action=TEMPLATE" +
-    "&text=" + encodeURIComponent(EVENT.title) +
-    "&dates=" + stamp(EVENT.start) + "/" + stamp(end) +
-    "&location=" + encodeURIComponent(EVENT.venue) +
-    "&details=" + encodeURIComponent(EVENT.details);
-
-  // Calendar: .ics download (Apple, Outlook, others)
-  document.getElementById("add-ics").addEventListener("click", () => {
-    const now = new Date();
-    const utcStamp = now.getUTCFullYear() + pad(now.getUTCMonth() + 1) + pad(now.getUTCDate()) + "T" +
-                     pad(now.getUTCHours()) + pad(now.getUTCMinutes()) + pad(now.getUTCSeconds()) + "Z";
-    const ics = [
-      "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Ring Ceremony Invite//EN", "CALSCALE:GREGORIAN",
-      "BEGIN:VEVENT",
-      "UID:ring-ceremony-jasmine-gurpreet-20261023@invite",
-      "DTSTAMP:" + utcStamp,
-      "DTSTART:" + stamp(EVENT.start),
-      "DTEND:" + stamp(end),
-      "SUMMARY:" + EVENT.title,
-      "LOCATION:" + EVENT.venue,
-      "DESCRIPTION:" + EVENT.details,
-      "END:VEVENT", "END:VCALENDAR"
-    ].join("\r\n");
-    const url = URL.createObjectURL(new Blob([ics], { type: "text/calendar;charset=utf-8" }));
-    const a = document.createElement("a");
-    a.href = url; a.download = "ring-ceremony.ics";
-    document.body.appendChild(a); a.click(); a.remove();
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
-  });
 
   // Countdown
   const cd = { d: document.getElementById("cd-d"), h: document.getElementById("cd-h"),
