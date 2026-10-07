@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Ring Ceremony Invite//EN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:ring-ceremony-jasmine-gurpreet-20261023@invite
+DTSTAMP:20261007T120000Z
+DTSTART:20261023T053000Z
+DTEND:20261023T083000Z
+SUMMARY:Ring ceremony - Jasmine & Gurpreet
+LOCATION:WJ Grand Hotel\, Near Verka Milk Plant\, Grand Trunk Road\, Salempur\, Jalandhar\, Punjab 144008
+DESCRIPTION:Jasmine Kaur & Gurpreet Singh invite you to celebrate their ring ceremony.
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Ring ceremony tomorrow at 11:00 AM
+END:VALARM
+END:VEVENT
+END:VCALENDAR
