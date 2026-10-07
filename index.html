@@ -205,6 +205,7 @@
     color: var(--muted);
   }
   .done { grid-column: 1 / -1; font-family: var(--serif); font-style: italic; font-size: 26px; color: var(--brown); padding: 6px 0; }
+  .done-sub { grid-column: 1 / -1; padding: 0 0 8px; font-size: 13px; letter-spacing: .04em; color: var(--muted); }
 
   /* ---------- Date ---------- */
   .date-card {
@@ -565,21 +566,41 @@
   const cd = { d: document.getElementById("cd-d"), h: document.getElementById("cd-h"),
                m: document.getElementById("cd-m"), s: document.getElementById("cd-s") };
   const cdBox = document.getElementById("countdown");
+  const closingEl = document.querySelector(".closing");
+  const dayKey = d => new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Kolkata" }).format(d);
+  const EVENT_DAY = dayKey(EVENT.start);
+  const EVENT_END = new Date(EVENT.start.getTime() + 5 * 3600 * 1000);   // event-day mode ends 5 hours after the start
+  let mode = "countdown";
+  function setMode(next, title, sub, closing) {
+    if (mode === next) return;
+    mode = next;
+    cdBox.innerHTML = '<div class="done">' + title + '</div>' + (sub ? '<div class="done-sub">' + sub + '</div>' : "");
+    cdBox.style.display = "block";
+    cdBox.classList.add("is-special");
+    if (closing && closingEl) closingEl.textContent = closing;
+  }
   function tick() {
-    const diff = EVENT.start - new Date();
-    if (diff <= 0) {
-      const sameDay = new Date().toDateString() === EVENT.start.toDateString();
-      cdBox.innerHTML = '<div class="done">' + (sameDay ? "Today is the day" : "Thank you for celebrating with us") + "</div>";
-      cdBox.style.display = "block";
-      return clearInterval(timer);
+    const now = new Date();
+    if (now >= EVENT_END) {
+      setMode("after", "Thank you for celebrating with us", "Your blessings and presence made our day special.", "With love and gratitude.");
+      return;
     }
+    if (now >= EVENT.start) {
+      setMode("live", "Today is the day", "The celebration has begun.");
+      return;
+    }
+    if (dayKey(now) === EVENT_DAY) {
+      setMode("today", "Today is the day", "We will see you at eleven o\u2019clock.");
+      return;
+    }
+    const diff = EVENT.start - now;
     const s = Math.floor(diff / 1000);
     cd.d.textContent = Math.floor(s / 86400);
     cd.h.textContent = pad(Math.floor(s % 86400 / 3600));
     cd.m.textContent = pad(Math.floor(s % 3600 / 60));
     cd.s.textContent = pad(s % 60);
   }
-  const timer = setInterval(tick, 1000);
+  setInterval(tick, 1000);
   tick();
 
   // Background music: try to autoplay; if the browser blocks it, start on the first tap.
